@@ -1,2 +1,1 @@
-# fusion
-An investigation into the relationship between emotional closeness and self-sacrifice.
+Identify fusion theory has become a popular psychological explanation of costly self-sacrifice, with recent work positing that an interaction between negative outgroup relations and fusion with one's ingroup which would lead to sacrificial behavior that benefits the ingroup. We test this hypothesis using a behavioral economic experiment designed to detect biased, self-interested favoritism among eight different populations ranging from foragers and horticulturalists to the fully market-integrated.
