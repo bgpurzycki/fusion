@@ -5,6 +5,8 @@
 ### Script written by Benjamin Grant Purzycki and Martin Lang
 ### contact email:  benjamin_purzycki@eva.mpg.de and martinlang@fas.harvard.edu
 
+### Last updated December 21, 2018
+
 setwd("")
 set.seed(7)
 
@@ -20,7 +22,7 @@ d <- read.csv("d.csv")
 d$t <- NA #add vector of total possible coins
 d$t <- 30
 
-o <- as.integer(d$EMOO) # outgroup fusion
+o <- as.integer(d$EMOO) # outgroup relations
 c <- as.integer(d$EMOC) # distant ingroup fusion
 g <- as.integer(d$EMOI) # local ingroup fusion
 y <- as.integer(d$COREL.S) # coins in distant ingroup cup
@@ -130,7 +132,7 @@ mycol3 <-  rgb(255, 140, 0, max = 255, alpha = 100, names = "orange")
 denss <- density(s, na.rm = T)
 densg <- density(g, na.rm = T)
 denso <- density(o, na.rm = T)
-plot(NA, xlab = "Ingroup and Outgroup Fusion", ylab = "Density", xlim=c(0,6), ylim=c(0,.8), cex.lab = 1.3)
+plot(NA, xlab = "Ingroup and Outgroup Scores", ylab = "Density", xlim=c(0,6), ylim=c(0,.8), cex.lab = 1.3)
 polygon(densg, col = mycol2)
 polygon(denso, col = mycol3)
 plot(NA, xlab = "Religious Similarity", ylab = "Density", xlim=c(-3,3), ylim=c(0,.5), cex.lab = 1.3)
@@ -231,7 +233,7 @@ dat <- dat %>%
   mutate(
     INGREMO = EMOI, # Ingroup fusion
     CORELEMO = EMOC, # Extended fusion
-    OUTGREMO = EMOO) # Outgroup fusion
+    OUTGREMO = EMOO) # Outgroup relations
 
 # create data set w/o NAs
 dat1<- dat %>%  
@@ -266,7 +268,7 @@ simulationOutput <- simulateResiduals(fittedModel = fg, n = nobs(fg))
 plotSimulatedResiduals(simulationOutput = simulationOutput)
 
 
-### Extended - check whether outgroup fusion predicts sacrifice ###
+### Extended - check whether outgroup relations predicts sacrifice ###
 summary(fo <- glmer(cbind(COREL.S, 30-COREL.S) ~ OUTGREMO + (OUTGREMO|SITE), data = dat, family = 'binomial'))
 
 # plot residuals
@@ -419,7 +421,7 @@ ggplot(dat.c2, aes(rev(OUTGREMO), INGREMO, z = DISTANT_Cup)) +
   
   scale_x_continuous(limits=c(1,5), breaks = c(seq(1,5,1))) +
   
-  ylab("Outgroup Fusion") + xlab("Ingroup Fusion") +
+  ylab("Outgroup Relations") + xlab("Ingroup Fusion") +
   
   theme_bw() + 
   
@@ -483,7 +485,7 @@ ggplot(dat.c2, aes(rev(OUTGREMO), INGREMO, z = DISTANT_Cup)) +
   scale_color_viridis(discrete=T) + 
   theme_bw() + 
   scale_x_continuous(limits=c(1,5), breaks = c(seq(1,5,1))) +
-  ylab("Outgroup Fusion") + xlab("Ingroup Fusion") +
+  ylab("Outgroup Relations") + xlab("Ingroup Fusion") +
   theme(
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
@@ -542,7 +544,7 @@ ggplot(dat.c2, aes(rev(OUTGREMO), INGREMO, z = DISTANT_Cup)) +
   scale_color_viridis(discrete=T) + 
   theme_bw() + 
   scale_x_continuous(limits=c(1,5), breaks = c(seq(1,5,1))) +
-  ylab("Outgroup Fusion") + xlab("Ingroup Fusion") +
+  ylab("Outgroup Relations") + xlab("Ingroup Fusion") +
   theme(
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
@@ -592,11 +594,11 @@ ggplot() +
                                      o), width=.2, size =1,
                 position=position_dodge(0.25)) +
   
-  scale_color_manual(name = "Outgroup fusion",breaks = c("1","3","5"),
+  scale_color_manual(name = "Outgroup relations",breaks = c("1","3","5"),
                      values = c("#999999", "#56B4E9", "#E69F00"),
                      labels = c("1", "3", "5")) +
   
-  scale_shape_manual(name = "Outgroup fusion",breaks = c("1","3","5"),
+  scale_shape_manual(name = "Outgroup relations",breaks = c("1","3","5"),
                      values = c(16, 17, 18),
                      labels = c("1", "3","5")) +
   
@@ -683,7 +685,7 @@ ggplot(data = dat.x, aes(x = INGREMO, y = COREL.S/30, color = OUTGREMO.RD)) +
   
   guides(colour = guide_legend(override.aes = list(alpha = 1))) + 
   
-  scale_color_manual(name = "Outgroup fusion",
+  scale_color_manual(name = "Outgroup relations",
                      values = c("#999999", "#56B4E9","#E69F00"),
                      labels = c("1 & 2", "3 & 4", "5")) +
   
