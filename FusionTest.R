@@ -5,7 +5,7 @@
 ### Script written by Benjamin Grant Purzycki and Martin Lang
 ### contact email:  benjamin_purzycki@eva.mpg.de and martinlang@fas.harvard.edu
 
-### Last updated December 21, 2018
+### Last updated January 10, 2019
 
 setwd("")
 set.seed(7)
