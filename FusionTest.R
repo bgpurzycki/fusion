@@ -62,18 +62,7 @@ priorm1 <- c(set_prior("normal(0,1)", class = "b"),
              set_prior("cauchy(0,2)", class = "sd"),
              set_prior("lkj(4)", class = "cor"))
 
-# Panels a and b in main plot
-m1a <- brm(formula = y | trials(t) ~ mo(g)*mo(o) + (mo(g)*mo(o) | site), 
-           data = n1, family = binomial("logit"),
-           prior = priorm1,
-           warmup = 1000, iter = 5000, chains = 2, control = list(adapt_delta = .99), seed = 7)
-
-m1b <- brm(formula = y | trials(t) ~ mo(s) + mo(g)*mo(o) + (mo(g)*mo(o) | site), 
-           data = n2, family = binomial("logit"),
-           prior = priorm1,
-           warmup = 1000, iter = 5000, chains = 2, control = list(adapt_delta = .99), seed = 7)
-
-# Panels c and d in main plot
+# Panels 1 and 2 in main plot
 mg <- brm(formula = y | trials(t) ~ mo(g) + (mo(g) | site), 
           data = n1, family = binomial("logit"),
           prior = priorm1,
@@ -83,6 +72,18 @@ mo <- brm(formula = y | trials(t) ~ mo(o) + (mo(o) | site),
           data = n1, family = binomial("logit"),
           prior = priorm1,
           warmup = 1000, iter = 5000, chains = 2, control = list(adapt_delta = .99), seed = 7)
+
+
+# Panels 3 and 4 in main plot
+m1a <- brm(formula = y | trials(t) ~ mo(g)*mo(o) + (mo(g)*mo(o) | site), 
+           data = n1, family = binomial("logit"),
+           prior = priorm1,
+           warmup = 1000, iter = 5000, chains = 2, control = list(adapt_delta = .99), seed = 7)
+
+m1b <- brm(formula = y | trials(t) ~ mo(s) + mo(g)*mo(o) + (mo(g)*mo(o) | site), 
+           data = n2, family = binomial("logit"),
+           prior = priorm1,
+           warmup = 1000, iter = 5000, chains = 2, control = list(adapt_delta = .99), seed = 7)
 
 # Basic summaries, diagnostics, counterfactuals, and visualizatons
 summary(m1a)
@@ -100,7 +101,6 @@ logistic(fixef(m1b))
 logistic(fixef(m1b)[1,1])
 logistic(fixef(m1b)[1,1] + fixef(m1b)[2,1]) # add similarity
 logistic(fixef(m1b)[1,1] + fixef(m1b)[2,1]*2) # add max similarity
-
 
 logistic(fixef(mg))
 logistic(fixef(mg)[1,1])
